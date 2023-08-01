@@ -1,0 +1,73 @@
+<header class="masthead headerindex" style="background-image: url(https://picsum.photos/1900/1267);">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1><%=@noticia.titulo %></h1>
+                    <span class="subheading"><%= @noticia.encabezado %></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <p><%= @noticia.cuerpo %></p>
+                        <hr class="my-4" />
+                        
+                        <h3>Comentarios</h3> 
+                        <%= turbo_stream_from @noticia %> 
+                        <ul> 
+                        <% @noticia.comentarios.joins(:user).each do |comentario| %>
+                            <li>
+                              <p><%= comentario.contenido %></p>
+                              <p>Posteado por: <%= comentario.user.email %></p>
+                          
+                              <% if can? :destroy, comentario, Comentario, user_id: current_user.id %>
+                                <p>
+                                  <%= link_to "Editar comentario", edit_comentario_path(comentario), class: "btn btn-sm btn-success" %><br />
+                                  <%= button_to "Eliminar comentario", comentario_path(comentario), method: :delete, class: 'btn btn-sm btn-danger', data: { confirm: "¿Estás seguro?" } %>
+                                </p>
+                              <% end %>
+                            </li>
+                            <hr class="my-4" />
+                          <% end %>
+                        </ul> 
+
+                        <% if can? :create, Comentario %>
+                            <%= form_with(model: @comentario, url: comentarios_path) do |form| %>
+                                <%= form.hidden_field :noticia_id, value: @noticia.id %>
+                                <%= form.hidden_field :user_id, value: current_user.id %>
+                                <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+                                <h3 class="my-4">Escribe un nuevo comentario:</h3>
+
+                                <%= form.fields_for :comentario do |comentario_fields| %>
+                                <div class="field my-3">
+                                    <%= comentario_fields.label :contenido, style: "display: block", class: "mb-2" %>
+                                    <%= comentario_fields.text_field :contenido, class: "form-control" %>
+                                </div>
+                                <% end %>
+
+                                <div>
+                                <%= form.submit class: "btn btn-sm btn-primary my-3" %>
+                                </div>
+                            <% end %>
+                            <% else %>
+                            <!-- mensaje para usuarios no logueados -->
+                            <p>Por favor, inicia sesión para dejar un comentario.</p>
+                        <% end %>
+
+
+
+                    <%= link_to "Volver a inicio", noticia_path, class: "btn btn-primary me-2" %>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </article>
+

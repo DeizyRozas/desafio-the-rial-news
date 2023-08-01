@@ -1,0 +1,51 @@
+<header class="masthead headerindex" style="background-image: url(https://picsum.photos/1900/1267);">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Registro</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<main class="mb-4">
+  <div class="container px-4 px-lg-5">
+      <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="col-md-10 col-lg-8 col-xl-7">
+
+            <div class="my-5">
+
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <%= render "devise/shared/error_messages", resource: resource %>
+
+            <div class="field">
+              <%= f.label :email, class:"my-2" %><br />
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control" %>
+            </div>
+
+            <div class="field">
+              <%= f.label :password, class:"my-2" %>
+              <% if @minimum_password_length %>
+              <em>(<%= @minimum_password_length %> characters minimum)</em>
+              <% end %><br />
+              <%= f.password_field :password, autocomplete: "new-password", class:"form-control" %>
+            </div>
+
+            <div class="field">
+              <%= f.label :password_confirmation, class:"my-2" %><br />
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control" %>
+            </div>
+
+            <div class="actions">
+              <%= f.submit "Registrarse", class:"btn btn-primary my-2" %>
+            </div>
+            <% end %>
+
+            <%= render "devise/shared/links" %>
+      </div>                      
+      </div>
+    </div>
+  </div>
+</main>
+          

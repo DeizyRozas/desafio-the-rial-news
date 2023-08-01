@@ -1,0 +1,33 @@
+<header class="masthead headerindex" style="background-image: url(https://picsum.photos/1900/1267);">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Rial News</h1>
+                    <span class="subheading">Donde la libertad de expresión es respetada</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+
+            <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Lo último</a>
+            </li>
+            </ul> 
+
+            <% @noticias.each do |noticia| %>
+                <!-- Display the news item details here -->
+                <h2><%= noticia.titulo %></h2>
+                <p><%= noticia.encabezado %></p>
+                <p>Creado el: <%= noticia.created_at.strftime('%d-%m-%Y %H:%M:%S') %></p>
+                <hr class="my-4" />
+            <% end %>
+        </div>
+    </div>
+</div>
+

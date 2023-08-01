@@ -1,0 +1,60 @@
+<header class="masthead headerindex" style="background-image: url(https://picsum.photos/1900/1267);">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Inicio de sesión</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<main class="mb-4">
+  <div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="my-5">
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+          <div class="field my-3">
+            <%= f.label :email, class:"mb-2" %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control" %>
+          </div>
+          <div class="field  my-3">
+            <%= f.label :password, class:"mb-2"  %><br />
+            <%= f.password_field :password, autocomplete: "current-password", class:"form-control" %>
+          </div>
+
+          <% if devise_mapping.rememberable? %>
+          <div class="field">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </div>
+          <% end %>
+
+          <div class="actions">
+            <%= f.submit "Iniciar sesión", class:"btn btn-sm btn-primary my-2" %>
+          </div>
+          <% end %>
+
+          <%= render "devise/shared/links" %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
